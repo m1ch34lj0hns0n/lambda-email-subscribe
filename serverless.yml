@@ -12,9 +12,11 @@
 # Happy Coding!
 
 service: lambda-email-subscribe
+plugins:
+  - serverless-dotenv-plugin
 # app and org for use with dashboard.serverless.com
-#app: your-app-name
-#org: your-org-name
+app: lambda-email-subscribe-app
+org: michaelbenjohnson
 
 # You can pin your service to only deploy with a specific Serverless version
 # Check out our docs for more details
@@ -26,7 +28,7 @@ provider:
 
 # you can overwrite defaults here
 #  stage: dev
-#  region: us-east-1
+  region: eu-west-2
 
 # you can add statements to the Lambda function's IAM Role here
 #  iamRoleStatements:
@@ -49,7 +51,10 @@ provider:
 #    variable1: value1
 
 # you can add packaging information here
-#package:
+package:
+ exclude:
+   - .env
+   - node_modules
 #  include:
 #    - include-me.js
 #    - include-me-dir/**
@@ -58,8 +63,12 @@ provider:
 #    - exclude-me-dir/**
 
 functions:
-  hello:
-    handler: handler.hello
+  subscribe:
+    handler: handler.subscribe
+    events:
+      - http:
+          path: subscribe/post
+          method: post
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
 #    Check the event documentation for details
