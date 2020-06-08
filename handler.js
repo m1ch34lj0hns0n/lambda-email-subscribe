@@ -24,7 +24,6 @@ const subscribe = async email => {
 };
 
 module.exports.subscribe = async event => {
-  let response = null;
   const body = event.body;
   const request = await subscribe(body.email);
   
