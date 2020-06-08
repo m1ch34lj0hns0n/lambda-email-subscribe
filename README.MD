@@ -1,2 +1,2 @@
-#lambda-email-subscribe
+# lambda-email-subscribe
 Send user data to mailchimp
